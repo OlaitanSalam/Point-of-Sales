@@ -1,0 +1,48 @@
+{% extends "posApp/base.html" %}
+{% block content %}
+<div class="store-dashboard">
+  <h1>{{ store.name }} Dashboard</h1>
+  <p>Total unique products in inventory: {{ products_count }}</p>
+
+  <h2>Inventory</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Product Code</th>
+        <th>Product Name</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in inventory %}
+      <tr>
+        <td>{{ item.product.code }}</td>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>Sales</h2>
+  <!-- Display sales data (if Sales model is linked to store; see Option 2) -->
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Sale Code</th>
+        <th>Grand Total</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for sale in sales %}
+      <tr>
+        <td>{{ sale.code }}</td>
+        <td>{{ sale.grand_total }}</td>
+        <td>{{ sale.date_added|date:"Y-m-d H:i" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
